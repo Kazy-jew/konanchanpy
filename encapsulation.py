@@ -32,3 +32,20 @@ class DL_Process:
         print(dates)
         id_list = Archive().check(dates)
         DL_Core().sln_core(id_list, dates)
+
+
+class Print_Welcome:
+    def konachan(self):
+        print('   Welcome to Konachan Downloader ! ')
+        print('--------------------------------------')
+        print('|************************************|')
+        print('|*** 1.download   2.the remaining ***|')
+        print('|*** 3. exit                      ***|')
+        print('|************************************|')
+        print('¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯')
+
+    def yande_re(self):
+        pass
+
+    def minitokyo(self):
+        pass
