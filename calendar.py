@@ -22,3 +22,7 @@ class Calendar:
                           date(int('{}'.format(self.year)), int('{:>2}'.format(date_in[0])), int('{:>2}'.format(date_in[2]))))
         print(self.date_list)
         return self.date_list
+
+
+def syspath():
+    return
