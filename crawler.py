@@ -18,6 +18,7 @@ from calendar import Calendar
 
 
 class Page_ID:
+
     def multi_dates(self, dates):
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
                                  ' Chrome/92.0.4515.131 Safari/537.36'}
@@ -25,6 +26,7 @@ class Page_ID:
         # id list of date range
         dates_list = []
         year = Calendar().year
+        case = Web_URL.konachan
         for n in dates:
             # id list of a date
             date_list = []
@@ -34,7 +36,7 @@ class Page_ID:
                     date_list += r.read().splitlines()
             else:
                 for i in range(1, 24):
-                    url = 'https://konachan.com/post?page={}&tags=date%3A{}-{}'.format(i, year, n)
+                    url = case.format(i, year, n)
                     page_ = requests.get(url, headers=headers, proxies=proxy_url)
                     tree = html.fromstring(page_.content)
                     mark_tag = tree.xpath('//*[@id="post-list"]/div[3]/div[4]/p/text()')
@@ -47,13 +49,13 @@ class Page_ID:
                                 f.write('{}\n'.format(item))
                         break
             dates_list += date_list
-            print('{}-{}...done'.format((year, n)))
+            print('{}-{}...done'.format(year, n))
         with open('{}_{}'.format(dates[0], dates[-1]), 'w') as fa:
             for item in dates_list:
                 fa.write('{}\n'.format(item))
         return dates, dates_list
 
-    def selenium_multi_dates(self, dates):
+    def sln_multi_dates(self, dates):
         return
 
     def get_id(self, dates):
@@ -70,6 +72,7 @@ class Page_ID:
 
 
 class Downloader:
+
     def download(self, url, id_list):
         download_folder = 'Konachan.' + re.sub('[-]', '.', url.split('%3A')[-1])  # 创建下载文件夹
         if not os.path.exists(download_folder):
@@ -131,3 +134,10 @@ class Downloader:
         time.sleep(5)
         driver.close()
         return
+
+
+def syspath():
+    path = os.getcwd().split('\\')
+    path = '\\'.join(path[:3])
+    path = path + '\\Downloads'
+    return path

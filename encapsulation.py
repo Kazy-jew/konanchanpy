@@ -1,10 +1,9 @@
-from crawler import Downloader, Page_ID
+from crawler import Downloader, Page_ID, syspath
 from archive import Archive
-from calendar import Calendar, syspath
+from calendar import Calendar
 import os
 
-current = Calendar()
-year = current.year
+year = Calendar().year
 
 
 class DL_Core:
@@ -20,7 +19,7 @@ class DL_Core:
 
 class DL_Process:
     def bulk_dl(self):
-        dates = current.date_input()
+        dates = Calendar().date_input()
         print(dates)
         Page_ID().multi_dates(dates)
         id_list = Page_ID().get_id(dates)

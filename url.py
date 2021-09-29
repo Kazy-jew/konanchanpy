@@ -1,8 +1,5 @@
 class Web_URL:
-    def konachan(self):
-        pass
-    def yande(self):
-        pass
-    def minitokyo(self):
-        pass
+    konachan = 'https://konachan.com/post?page={}&tags=date%3A{}-{}'
+    yande ='https://yande.re/post?page={}&tags=date%3A{}-{}'
+    minitokyo = 'http://gallery.minitokyo.net/download/{}'
 

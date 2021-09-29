@@ -1,7 +1,8 @@
 import os, shutil
 from calendar import Calendar
+from crawler import syspath
 
-path = 'C:\\Users\\torum\\Downloads'
+path = syspath()
 year = Calendar().year
 
 class Archive:
