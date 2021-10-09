@@ -1,5 +1,6 @@
 from encapsulation import DL_Process, Print_Welcome
 
+
 def konachan_main():
     Print_Welcome().konachan()
     while True:
@@ -14,4 +15,5 @@ def konachan_main():
             print('Invalid Input')
 
 
-konachan_main()
+if __name__ == '__main__':
+    konachan_main()

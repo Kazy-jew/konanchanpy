@@ -7,6 +7,7 @@ year = Calendar().year
 
 
 class DL_Core:
+
     def sln_core(self, id_list, dates):
         while id_list:
             Downloader().sln_download(id_list)
@@ -18,6 +19,7 @@ class DL_Core:
 
 
 class DL_Process:
+
     def bulk_dl(self):
         dates = Calendar().date_input()
         Page_ID().multi_dates(dates)
@@ -33,6 +35,7 @@ class DL_Process:
 
 
 class Print_Welcome:
+
     def konachan(self):
         print('   Welcome to Konachan Downloader ! ')
         print('--------------------------------------')
