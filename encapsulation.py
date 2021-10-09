@@ -1,4 +1,4 @@
-from crawler import Downloader, Page_ID, syspath
+from crawler import Downloader, Page_ID
 from archive import Archive
 from calendar import Calendar
 import os
