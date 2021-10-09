@@ -20,7 +20,6 @@ class DL_Core:
 class DL_Process:
     def bulk_dl(self):
         dates = Calendar().date_input()
-        print(dates)
         Page_ID().multi_dates(dates)
         id_list = Page_ID().get_id(dates)
         DL_Core().sln_core(id_list, dates)
