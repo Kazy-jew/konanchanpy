@@ -16,6 +16,8 @@ class DL_Core:
         for _ in dates:
             os.remove('./{}-{}'.format(year, _))
         os.remove('./{}_{}'.format(dates[0], dates[-1]))
+        os.remove('./undownloaded')
+        os.remove('dl_date_list')
 
 
 class DL_Process:
