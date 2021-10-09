@@ -14,7 +14,7 @@ import pyautogui
 import os
 from tqdm import tqdm
 from url import Web_URL
-from calendar import Calendar
+from koyomi import Calendar
 
 
 class Page_ID:
