@@ -1,9 +1,10 @@
 from encapsulation import DL_Process, Print_Welcome
 
+
 def konachan_main():
     Print_Welcome().konachan()
     while True:
-        choice = input('select operation')
+        choice = input('select operation: ')
         if choice == '1':
             DL_Process().bulk_dl()
         elif choice == '2':
@@ -16,4 +17,5 @@ def konachan_main():
             print('Invalid Input')
 
 
-konachan_main()
+if __name__ == '__main__':
+    konachan_main()

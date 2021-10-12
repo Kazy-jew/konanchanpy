@@ -14,7 +14,7 @@ import pyautogui
 import os
 from tqdm import tqdm
 from url import Web_URL
-from calendar import Calendar
+from koyomi import Calendar
 
 
 class Page_ID:
@@ -116,7 +116,7 @@ class Downloader:
         print('start downloading...')
         headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 '
                                  'Firefox/67.0'}
-        proxy_url = None  # {'http': 'http://127.0.0.1:1081'}
+        proxy_url = {'http': 'http://127.0.0.1:7890'}
         for i in tqdm(id_list):
             url = 'https://konachan.com/post/show/{}'.format(i)  # 图片页面的链接
             page = requests.get(url, headers=headers, proxies=proxy_url)
@@ -146,7 +146,7 @@ class Downloader:
         #     'safebrowsing.enabled': False
         # }
         # chrome_options.add_experimental_option('prefs', pref)
-        driver = webdriver.Chrome()  # chrome_options=chrome_options)
+        driver = webdriver.Chrome(chrome_options=chrome_options)
         for _ in tqdm(id_list):
             url = 'https://konachan.com/post/show/{}'.format(_)
             driver.get(url)

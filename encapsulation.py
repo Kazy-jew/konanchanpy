@@ -1,12 +1,13 @@
 from crawler import Downloader, Page_ID
 from archive import Archive
-from calendar import Calendar
+from koyomi import Calendar
 import os
 
 year = Calendar().year
 
 
 class DL_Core:
+
     def sln_core(self, id_list, dates):
         while id_list:
             Downloader().sln_download(id_list)
@@ -15,6 +16,8 @@ class DL_Core:
         for _ in dates:
             os.remove('./{}-{}'.format(year, _))
         os.remove('./{}_{}'.format(dates[0], dates[-1]))
+        os.remove('./undownloaded')
+        os.remove('dl_date_list')
 
     def sln_tags(self, id_list, tags):
         while id_list:
@@ -29,6 +32,7 @@ class DL_Core:
 
 
 class DL_Process:
+
     def bulk_dl(self):
         dates = Calendar().date_input()
         Page_ID().multi_dates(dates)
@@ -56,6 +60,7 @@ class DL_Process:
 
 
 class Print_Welcome:
+
     def konachan(self):
         print('    Welcome to Konachan Downloader ! ')
         print('---------------------------------------')
