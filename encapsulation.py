@@ -39,23 +39,25 @@ class DL_Process:
         id_list = Page_ID().get_id(dates)
         DL_Core().sln_core(id_list, dates)
 
-    def chk_dl(self, tags=None):
-        if tags is None:
+    def chk_dl(self):
+        if os.path.exists('./dl_date_list'):
             with open('./dl_date_list', 'r') as r:
                 dates = r.read().splitlines()
             print(dates)
             id_list = Archive().check(dates)
             DL_Core().sln_core(id_list, dates)
         else:
+            with open('./tags', 'r') as r:
+                tags = r.read()
             id_list = Archive().checktag(tags)
             DL_Core().sln_tags(id_list, tags)
 
-
     def tag_dl(self):
-        tags_url = input('please paste url here')
+        tags_url = input('please paste url here: ')
         tags = tags_url.split('tags=')[-1]
         id_list = Page_ID().custom_url(tags_url)
         DL_Core().sln_tags(id_list, tags)
+
 
 
 

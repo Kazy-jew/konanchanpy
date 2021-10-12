@@ -61,6 +61,8 @@ class Page_ID:
         proxy_url = {'http': 'http://127.0.0.1:7890'}
         id_list = []
         tags = tags_url.split('tags=')[-1]
+        with open('tags', 'w') as f:
+            f.write(tags)
         for i in range(1, 100):
             page_list = []
             file_name = 'Konachan.tag({}).p{:>2}'.format(tags, i)

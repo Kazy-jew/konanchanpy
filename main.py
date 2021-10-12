@@ -10,7 +10,7 @@ def konachan_main():
         elif choice == '2':
             DL_Process().chk_dl()
         elif choice == '3':
-            pass
+            DL_Process().tag_dl()
         elif choice == '4':
             exit('aborted')
         else:
