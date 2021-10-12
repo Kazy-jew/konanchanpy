@@ -41,3 +41,34 @@ class Archive:
                 name_id = j.split(' ')[2]
                 if name_id in pairli:
                     shutil.move(os.path.join(path, j), os.path.join(path, folder))
+
+    def checktag(self, tags):
+        list1 = os.listdir(path)
+        list2 = []
+        list3 = []
+        for w in list1:
+            if w.startswith('Konachan.com'):
+                list2.append(w.split()[2])
+        with open('Konachan.tags({})'.format(tags), 'r') as r:
+            list3 += r.read().splitlines()
+        diff = list(set(list3) - set(list2))
+        with open('undownloaded', 'w') as f:
+            for _ in diff:
+                f.write('{}\n'.format(_))
+        return diff
+
+    def movetag(self, tags):
+        list1 = os.listdir(path)
+        list2 = []
+        for i in list1:
+            if i.startswith('Konachan.com'):
+                list2.append(i)
+        with open('Konachan.tags({})'.format(tags)) as r:
+            pairli = r.read().splitlines()
+        folder = 'Konachan.tags.{}'.format(tags)
+        if not os.path.exists(os.path.join(path, folder)):
+            os.makedirs(os.path.join(path, folder))
+        for j in list2:
+            name_id = j.split(' ')[2]
+            if name_id in pairli:
+                shutil.move(os.path.join(path, j), os.path.join(path, folder))

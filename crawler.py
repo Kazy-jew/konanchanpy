@@ -36,7 +36,7 @@ class Page_ID:
                     date_list += r.read().splitlines()
             else:
                 for i in range(1, 24):
-                    url = case.format(i, year, n)
+                    url = case.format(i, 'date%3A',year, n)
                     page_ = requests.get(url, headers=headers, proxies=proxy_url)
                     tree = html.fromstring(page_.content)
                     mark_tag = tree.xpath('//*[@id="post-list"]/div[3]/div[4]/p/text()')
@@ -54,6 +54,41 @@ class Page_ID:
             for item in dates_list:
                 fa.write('{}\n'.format(item))
         return dates, dates_list
+
+    def custom_url(self, tags_url):
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
+                                 ' Chrome/92.0.4515.131 Safari/537.36'}
+        proxy_url = {'http': 'http://127.0.0.1:7890'}
+        id_list = []
+        tags = tags_url.split('tags=')[-1]
+        for i in range(1, 100):
+            page_list = []
+            file_name = 'Konachan.tag({}).p{:>2}'.format(tags, i)
+            if os.path.exists(file_name):
+                print('page {} under tag: {} already downloaded...'.format(i, tags))
+                with open(file_name) as r:
+                    id_list += r.read().splitlines()
+            else:
+                url = tags_url.split('tags=')[0] + 'page={}&tags='.format(i) + tags
+                page_ = requests.get(url, headers=headers, proxies=proxy_url)
+                tree = html.fromstring(page_.content)
+                mark_tag = tree.xpath('//*[@id="post-list"]/div[3]/div[4]/p/text()')
+                if not mark_tag:
+                    page_list +=  tree.xpath('//*[@id="post-list-posts"]/li/@id')
+                elif mark_tag == ['Nobody here but us chickens!']:
+                    page_list = [w.replace('p', '') for w in page_list]
+                    with open(file_name, 'w') as f:
+                        for item in page_list:
+                            f.write('{}\n'.format(item))
+                    break
+            id_list += page_list
+            print('page {} under tag: {} ...done'.format(i, tags))
+        with open('Konachan.tags({})'.format(tags), 'w') as f:
+            for item in id_list:
+                f.write('{}\n'.format(item))
+        return id_list
+
+
 
     def sln_multi_dates(self, dates):
         return
@@ -73,6 +108,7 @@ class Page_ID:
 
 class Downloader:
 
+    # deprecated
     def download(self, url, id_list):
         download_folder = 'Konachan.' + re.sub('[-]', '.', url.split('%3A')[-1])  # 创建下载文件夹
         if not os.path.exists(download_folder):
